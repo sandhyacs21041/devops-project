@@ -1,39 +1,37 @@
-
 pipeline {
  agent any
 
  stages {
 
-  stage('Clone'){
-   steps{
-    git 'https://github.com/yourusername/placement-devops-project.git'
+  stage('Clone') {
+   steps {
+    git 'https://github.com/sandhyacs21041/devops-project.git'
    }
   }
 
-  stage('Build'){
-   steps{
-    sh 'mvn -f backend/pom.xml clean install'
+  stage('Build') {
+   steps {
+    bat 'mvn clean install'
    }
   }
 
-  stage('Test'){
-   steps{
-    sh 'mvn -f backend/pom.xml test'
+  stage('Test') {
+   steps {
+    bat 'mvn test'
    }
   }
 
-  stage('Docker Build'){
-   steps{
-    sh 'docker build -t placement-app .'
+  stage('Docker Build') {
+   steps {
+    bat 'docker build -t placement-app .'
    }
   }
 
-  stage('Run Container'){
-   steps{
-    sh 'docker run -d -p 8080:8080 placement-app'
+  stage('Run Container') {
+   steps {
+    bat 'docker run -d -p 8080:8080 placement-app'
    }
   }
 
  }
-
 }
