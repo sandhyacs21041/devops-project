@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Placement Prediction</title>
+<style>
+body{font-family:Arial;text-align:center;margin-top:100px}
+input{padding:10px;margin:10px}
+button{padding:10px 20px;background:green;color:white;border:none}
+</style>
+</head>
+
+<body>
+
+<h2>Placement Readiness Prediction</h2>
+
+<input id="skill" placeholder="Skill Level">
+<br>
+<input id="cgpa" placeholder="CGPA">
+<br>
+
+<button onclick="predict()">Predict</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+async function predict(){
+
+let skill=document.getElementById("skill").value
+let cgpa=document.getElementById("cgpa").value
+
+let res=await fetch("http://localhost:8080/predict?skill="+skill+"&cgpa="+cgpa,{method:"POST"})
+let data=await res.text()
+
+document.getElementById("result").innerText=data
+
+}
+
+</script>
+
+</body>
+</html>
