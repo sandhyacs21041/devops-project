@@ -1,37 +1,31 @@
 pipeline {
- agent any
+    agent any
 
- stages {
+    stages {
 
-  stage('Clone') {
-   steps {
-    git branch: 'main', url: 'https://github.com/sandhyacs21041/devops-project.git'
-   }
-  }
+        stage('Build') {
+            steps {
+                bat 'cd backend && mvn clean package'
+            }
+        }
 
-  stage('Build') {
-   steps {
-    bat 'mvn clean install'
-   }
-  }
+        stage('Test') {
+            steps {
+                bat 'cd backend && mvn test'
+            }
+        }
 
-  stage('Test') {
-   steps {
-    bat 'mvn test'
-   }
-  }
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t placement-app .'
+            }
+        }
 
-  stage('Docker Build') {
-   steps {
-    bat 'docker build -t placement-app .'
-   }
-  }
+        stage('Run Container') {
+            steps {
+                bat 'docker run -d -p 8080:8080 placement-app'
+            }
+        }
 
-  stage('Run Container') {
-   steps {
-    bat 'docker run -d -p 8080:8080 placement-app'
-   }
-  }
-
- }
+    }
 }
