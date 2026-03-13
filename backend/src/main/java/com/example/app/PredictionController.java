@@ -1,4 +1,3 @@
-
 package com.example.app;
 
 import org.springframework.web.bind.annotation.*;
@@ -7,16 +6,18 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class PredictionController {
 
- @PostMapping("/predict")
- public String predict(@RequestParam int skill,@RequestParam double cgpa){
+    @GetMapping("/")
+    public String home() {
+        return "Placement Prediction App Running";
+    }
 
-  if(skill >=7 && cgpa >=7.5){
-   return "High Chance of Placement";
-  }
-  else{
-   return "Low Chance of Placement";
-  }
+    @GetMapping("/predict")
+    public String predict(@RequestParam int skill, @RequestParam double cgpa) {
 
- }
-
+        if (skill >= 7 && cgpa >= 7.5) {
+            return "High Chance of Placement";
+        } else {
+            return "Low Chance of Placement";
+        }
+    }
 }
