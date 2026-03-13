@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout SCM') {
-            steps {
-                git branch: 'main', url: 'https://github.com/sandhyacs21041/devops-project.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 bat 'cd backend && mvn clean package'
