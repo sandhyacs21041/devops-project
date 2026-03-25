@@ -22,12 +22,12 @@ pipeline {
         }
 
         stage('Run Container') {
-            steps {
-                bat 'docker stop placement-container || exit 0'
-                bat 'docker rm placement-container || exit 0'
-                bat 'docker run -d -p 8090:8080 --name placement-container placement-app'
-            }
-        }
+    steps {
+        bat 'docker stop placement-container || exit 0'
+        bat 'docker rm placement-container || exit 0'
+        bat 'docker run -d -p 8090:8080 --name placement-container placement-app'
+    }
+}
 
     }
 }
